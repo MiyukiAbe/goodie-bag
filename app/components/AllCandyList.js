@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
-import {fetchCandies} from '../store'
+import {fetchCandies} from '../reducers'
 import EachCandy from './EachCandy'
 
 class AllCandyList extends Component {
