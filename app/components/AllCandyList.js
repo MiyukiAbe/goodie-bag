@@ -2,24 +2,40 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import {fetchCandies} from '../reducers'
 import EachCandy from './EachCandy'
+import { withRouter } from 'react-router-dom'
+import Candy from './Candy';
 
 class AllCandyList extends Component {
   
-  async componentDidMount() {
-    await this.props.fetchCandies()
+  componentDidMount() {
+    this.props.fetchCandies()
   }
   
   render () {
-    console.log('All candies in AllCandy', this.props.candies)
+    // return (
+    //   <div>
+    //     <h2>Candy List</h2>
+    //       {
+    //         this.props.candies.map(candy => <EachCandy key={candy.id} candy={candy}/>)
+    //       }
+    //   </div>
+    // )
+    
     return (
       <div>
-        <h2>Candy List</h2>
-          {
-            this.props.candies.map(candy => <EachCandy key={candy.id} candy={candy} />)
-          }
+        <h2 className="section-title">Candies</h2>
+        <ul className="container">
+          {this.props.candies.map(candy => (
+            <div className="card" key={candy.id}>
+              <Candy candy={candy} />
+            </div>
+          ))}
+        </ul>
       </div>
     )
   }
+  
+  
 }
 
 const mapStateToProps = (state) => {
@@ -34,4 +50,4 @@ const mapStateToDispatch = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapStateToDispatch)(AllCandyList)
+export default withRouter(connect(mapStateToProps, mapStateToDispatch)(AllCandyList))

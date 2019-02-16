@@ -5,15 +5,22 @@ module.exports = db.define('candy', {
   // define your model here!
   name: {
     type: Sequelize.STRING,
-    allowNum: false
+    allowNum: false,
+    validate: {
+      notEmpty: true
+    }
   },
   description: {
     type: Sequelize.TEXT,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   },
   quantity: {
     type: Sequelize.INTEGER,
     validate: {
+      min: 0,
       max: 10
     }
   },
